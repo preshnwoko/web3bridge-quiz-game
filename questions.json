@@ -1,0 +1,16 @@
+[
+  {
+    "id": "q1",
+    "topic": "javascript",
+    "question": "Which method adds an element to the end of an array?",
+    "options": ["pop()", "push()", "shift()", "unshift()"],
+    "answerIndex": 1
+  },
+  {
+    "id": "q2",
+    "topic": "html",
+    "question": "Which tag is used for the largest heading?",
+    "options": ["<h1>", "<h6>", "<head>", "<title>"],
+    "answerIndex": 0
+  }
+]

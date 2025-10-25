@@ -1,73 +1,137 @@
-# React + TypeScript + Vite
+# Quiz Game 🎯
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fast-paced, timed quiz game built with React, TypeScript, and Vite. Test your knowledge across various topics with a 20-second timer per question and compete on the leaderboard!
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Timed Questions**: 20 seconds per question to keep you on your toes
+- **Instant Feedback**: Get immediate visual feedback on correct/incorrect answers
+- **Local Leaderboard**: Save your scores and compete with others
+- **Responsive Design**: Works great on desktop and mobile
+- **Toast Notifications**: Clean success/error messages
+- **Question Validation**: Robust question loading with error handling
 
-## React Compiler
+## How to Play
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **Start the Quiz**: Questions load automatically when you open the app
+2. **Answer Quickly**: You have 20 seconds per question - choose wisely!
+3. **Get Feedback**: Correct answers show a green success toast, incorrect ones show red
+4. **Auto-Advance**: Questions advance automatically after answering or when time runs out
+5. **Save Your Score**: Enter your name at the end to save to the leaderboard
+6. **View Leaderboard**: Check out the top 10 scores from all players
 
-## Expanding the ESLint configuration
+## Game Rules
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Each question has a 20-second timer
+- Questions auto-advance when time expires (counts as incorrect)
+- Timer resets when you select an answer
+- Final score is based on correct answers only
+- Leaderboard shows top 10 scores sorted by highest first
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Prerequisites
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js (v16 or higher)
+- Yarn package manager
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+cd quiz-game
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Install dependencies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+yarn install
 ```
+
+3. Start the development server:
+
+```bash
+yarn dev
+```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+### Building for Production
+
+```bash
+yarn build
+```
+
+The built files will be in the `dist` directory.
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── quiz.tsx           # Main quiz logic and timer
+│   ├── questionCard.tsx   # Individual question display
+│   ├── scoreScreen.tsx    # End game screen with name input
+│   └── leaderboard.tsx    # Top 10 scores display
+├── hook/
+│   └── fetchQuestions.ts  # Custom hook for loading questions
+├── types.ts               # TypeScript type definitions
+└── App.tsx               # Main app component
+
+public/
+└── questions.json        # Quiz questions data
+```
+
+## Adding Questions
+
+Questions are stored in `public/questions.json`. Each question follows this format:
+
+```json
+{
+  "id": "unique-id",
+  "topic": "category-name",
+  "question": "Your question here?",
+  "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
+  "answerIndex": 0
+}
+```
+
+- `answerIndex` corresponds to the correct option (0-based index)
+- Questions support HTML in the question text
+- Invalid questions are automatically filtered out
+
+## Technologies Used
+
+- **React 19** - UI framework
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **SCSS** - Styling
+- **React Toastify** - Toast notifications
+- **Local Storage** - Leaderboard persistence
+
+## Development
+
+### Available Scripts
+
+- `yarn dev` - Start development server
+- `yarn build` - Build for production
+- `yarn lint` - Run ESLint
+- `yarn preview` - Preview production build
+
+### Code Style
+
+The project uses ESLint with TypeScript rules. Run `yarn lint` to check for issues.
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Add your questions or improvements
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is open source and available under the MIT License.

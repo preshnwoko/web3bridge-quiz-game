@@ -12,7 +12,16 @@ const useFetchQuestions = () => {
         if (!r.ok) throw new Error("Failed to load questions");
         return r.json();
       })
-      .then((data: Question[]) => setQuestions(data))
+      .then((data: Question[]) => {
+        const valid = data.filter(
+          (q) =>
+            q &&
+            typeof q.question === "string" &&
+            Array.isArray(q.options) &&
+            q.options.length > q.answerIndex
+        );
+        setQuestions(valid);
+      })
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
   }, []);
